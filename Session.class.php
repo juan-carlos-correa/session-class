@@ -31,7 +31,7 @@ class Session
 	{
 		$this->setSessionCacheLimiter('private');
 		$this->setSessionCacheExpire(0);
-		$this->setCookieParams();
+		$this->setCookieParams(30);
 
 		session_start();
 
@@ -69,11 +69,12 @@ class Session
 	*
 	* @return: void
 	*/
-	private function setCookieParams()
+	private function setCookieParams($minutes)
 	{
 		$cookie_params = session_get_cookie_params();
 
 		session_set_cookie_params(
+				$minutes*60,
 				$cookie_params['path'],
 				$cookie_params['domain'],
 				'SECURE',
